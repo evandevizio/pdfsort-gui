@@ -14,11 +14,8 @@ package main;
 public class PDFSort {
 	
 	public static void main(String[] args) {
+		Operations ops = new Operations();
 		Gui gui = new Gui();
-		gui.CreateGui();
-		
-		if(gui.currentFilePath == "") {
-			gui.ta.append("Please open a PDF. " + "Use \"File -> Open\" to navigate.");
-		}
+		gui.CreateGui(ops);
 	}
 }

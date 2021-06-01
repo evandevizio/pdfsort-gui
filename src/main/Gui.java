@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+
 import javax.swing.*;
 
 public class Gui {
@@ -31,7 +32,7 @@ public class Gui {
 			"-+-+-+-+-+-+-|                   |+-+-+-|                 |+-+-+-+-+-+" + "\r\n" +
 			"-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+" + "\r\n" +
 			"                                                                      " + "\r\n";
-    JFrame frame = new JFrame("PDFSort");
+    JFrame frame = new JFrame("PDFSort v1.0");
     JPanel panel = new JPanel();	// the panel is not visible in output
     JButton resetBtn = new JButton("Reset");
     JButton themeBtn = new JButton("Theme");
@@ -39,7 +40,6 @@ public class Gui {
     JScrollPane scroll = new JScrollPane(ta);
     JMenuBar mb = new JMenuBar();     // creating the MenuBar and options
     JMenu m1 = new JMenu("File");
-    JMenu m2 = new JMenu("Help");
     JMenuItem mOpen = new JMenuItem("Open");
     JMenuItem mExit = new JMenuItem("Exit");
     
@@ -63,7 +63,7 @@ public class Gui {
     final Color[] bgColors = {black, white, black, yellow, green, magenta, black, black};
     final Color[] fgColors = {white, black, amber, grey, white, brightYellow, brightGreen, brightRed};
     
-	public void CreateGui(){
+	public void CreateGui(Operations ops){
     	
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(525, 625);
@@ -81,7 +81,6 @@ public class Gui {
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         
         mb.add(m1); 	// adding menu options
-        mb.add(m2);
         m1.add(mOpen);
         m1.add(mExit);
         
@@ -94,7 +93,8 @@ public class Gui {
 			        File file = fc.getSelectedFile();
 			        currentFilePath = file.getAbsolutePath();
 			        currentFile = file;
-			        ta.setText(introString1 + introString2 + "File path = " + currentFilePath);
+			        ta.setText(introString1 + introString2 + "File path = " + currentFilePath + "\n");
+			        ops.processPdf(currentFile, ta);
 				}
 			}
         });
