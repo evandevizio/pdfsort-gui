@@ -1,6 +1,7 @@
 .metadata
 bin/
-pdfbox/
+src/commons-logging-1.2
+src/pdfbox
 tmp/
 screenshots/
 *.tmp
