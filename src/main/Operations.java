@@ -4,11 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import javax.swing.JTextArea;
-
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentInformation;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -25,10 +25,9 @@ public class Operations {
 	String previousSize = ""; // The previous page size.
 	String firstPageSize = ""; // The page size of the first page in a sequence.
     // BigDecimal representations of page dimensions. Easier for comparisons.
-    BigDecimal letterWidth = new BigDecimal("8.5");
-    BigDecimal legalWidth = new BigDecimal("8.5");
-    BigDecimal letterHeight = new BigDecimal("11.0");
-    BigDecimal legalHeight = new BigDecimal("14.0");
+    BigDecimal width = new BigDecimal(8.5); // Both legal and letter are 8.5" wide.
+    BigDecimal letterHeight = new BigDecimal (11.0);
+    BigDecimal legalHeight = new BigDecimal (14.0);
     
     int totalLetterCount = 0; // Total page counts for the PDF.
     int totalLegalCount = 0;
@@ -97,7 +96,7 @@ public class Operations {
 			previousSize = currentSize; // prepare for next page
 		}
 		
-		ta.append("\r\n" + "**********************************************************************" + "\r\n");
+		ta.append("\r\n" + "**********************************************************************" + "\n");
 	
 		String creator = ((info.getCreator() == null || info.getCreator() == "") ? "N/A" : info.getCreator());
 		ta.append("Creator : " + creator + "\n");
@@ -112,24 +111,30 @@ public class Operations {
 	
 	void getPageSize(PDPage page, JTextArea ta) {
 		// Get the dimensions of a page (1pt = 1/72"):
-		BigDecimal pageHeight = BigDecimal.valueOf((page.getMediaBox().getHeight() / 72));
-		BigDecimal pageWidth = BigDecimal.valueOf((page.getMediaBox().getWidth() / 72));
-		pageHeight.setScale(2); // Two decimal places
-		pageWidth.setScale(2);
+		float pageHeight = ((page.getMediaBox().getHeight() / 72));
+		float pageWidth = ((page.getMediaBox().getWidth() / 72));
+
+		BigDecimal pageH = new BigDecimal(pageHeight);
+		BigDecimal pageW = new BigDecimal(pageWidth);
+		pageH = pageH.round(new MathContext(2, RoundingMode.HALF_DOWN));
+		pageW = pageW.round(new MathContext(2, RoundingMode.HALF_DOWN));
+		
+		System.out.println(pageH);
+		System.out.println(pageW);
 		
 		// Set the current page size:
-		if ((pageWidth.compareTo(letterWidth) == 0) && ((pageHeight.compareTo(letterHeight) == 0)))
+		if ((width.compareTo(pageW) == 0) && (letterHeight.compareTo(pageH) == 0))
 		{
 			currentSize = "Letter";
 		}
 		else
-			if ((pageWidth.compareTo(legalWidth) == 0) && ((pageHeight.compareTo(legalHeight) == 0)))
+			if ((width.compareTo(pageW) == 0) && (legalHeight.compareTo(pageH) == 0))
 			{
 				currentSize = "Legal";
 			}
 			else
 			{
-				ta.append("***WARNING***: This page is neither Letter nor Legal size!");
+				ta.append("WARNING: This page is neither Letter nor Legal size!");
 				ta.append("\r\n");
 			}
 		

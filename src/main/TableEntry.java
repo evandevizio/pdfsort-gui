@@ -27,7 +27,7 @@ public class TableEntry {
 		letterString = (((getLetter() < 1) && (legal > letter)) ? "-" : String.valueOf(getLetter())); // Replace 0 counts with dashes.
 		legalString = (((getLegal() < 1) && (letter > legal)) ? "-" : String.valueOf(getLegal()));
 		
-		ta.append(String.format("%10s %4s %6s %2s %6s", seq, "|", letterString, "|", legalString + "     "));
+		ta.append(String.format("%10s %4s %6s %2s %6s", seq, "|", letterString, "|", legalString + "\n"));
 		ta.setCaretPosition(ta.getDocument().getLength());
 	}
 
