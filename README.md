@@ -27,3 +27,5 @@ Special thanks to:
 [Oracle Corporation](https://www.oracle.com/index.html)
 
 [Apache Software Foundation](https://www.apache.org/)
+
+[Notary Rotary](https://www.notaryrotary.com/)
