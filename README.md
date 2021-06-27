@@ -15,9 +15,9 @@ The "Reset" button will restart the program, clearing the text area and defaulti
 You can create a PDF for testing purposes by selecting "Create Test File" from the "File" menu.
 This will generate a blank PDF of 25 randomly mixed letter and legal sized pages in the program directory. 
 
-![Image](https://github.com/evandevizio/pdfsort-gui/blob/master/images/img01.jpg)
+![Image](/images/img01.jpg)
 
-![Image](https://github.com/evandevizio/pdfsort-gui/blob/master/images/img02.jpg)
+![Image](/images/img02.jpg)
 
 ## Credits
 Developed by [Evan DeVizio](https://evandevizio.com)
