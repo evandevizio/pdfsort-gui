@@ -7,12 +7,15 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 import javax.swing.JTextArea;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentInformation;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageTree;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
 
 
 public class Operations {
@@ -161,6 +164,35 @@ public class Operations {
 		totalPageCount = 0;
 		seqLetterCount = 0;
 		seqLegalCount = 0;
+	}
+	
+	void createTestFile(JTextArea ta) { // Creates a PDF with 25 blank pages of mixed legal and letter.
+		PDDocument doc = new PDDocument();
+		String fileName = "test.pdf";
+        String path = System.getProperty("user.dir");
+		PDPage legalPage = new PDPage(PDRectangle.LEGAL);
+		PDPage letterPage = new PDPage(PDRectangle.LETTER);
+		PDPage my_array[] = {legalPage, letterPage};
+		Random rnd = new Random();
+		
+		PDDocumentInformation info = doc.getDocumentInformation();
+		info.setCreator("Creator name goes here");
+		info.setAuthor("Author name goes here");
+		info.setCreationDate(Calendar.getInstance());
+		
+		int i = 0;
+		while (i < 25) {
+			doc.addPage(my_array[rnd.nextInt(my_array.length)]);
+			i++;
+		}
+		try {
+			doc.save(fileName);
+			doc.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		ta.append("Test PDF created in " + path);
+		System.out.println("Test PDF created in " + path);
 	}
 	
 	static void waitASec(int ms) {

@@ -41,6 +41,7 @@ public class Gui {
     JMenuBar mb = new JMenuBar();     // creating the MenuBar and options
     JMenu m1 = new JMenu("File");
     JMenuItem mOpen = new JMenuItem("Open");
+    JMenuItem mCreateTest = new JMenuItem("Create Test File");
     JMenuItem mExit = new JMenuItem("Exit");
     
     Font font = new Font("Monospaced", Font.BOLD, 12);
@@ -82,6 +83,7 @@ public class Gui {
         
         mb.add(m1); 	// adding menu options
         m1.add(mOpen);
+        m1.add(mCreateTest);
         m1.add(mExit);
         
         mOpen.addActionListener(new ActionListener() {
@@ -99,10 +101,17 @@ public class Gui {
 			}
         });
         
+        mCreateTest.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ops.createTestFile(ta);				
+			}
+        });
+        
         mExit.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent event) {
-        		System.exit(0);	// terminate the program
+        		System.exit(0);	// Terminate the program.
         	}
         });
         
