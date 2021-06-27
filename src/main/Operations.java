@@ -177,7 +177,6 @@ public class Operations {
 		
 		PDDocumentInformation info = doc.getDocumentInformation();
 		info.setCreator("Creator name goes here");
-		info.setAuthor("Author name goes here");
 		info.setCreationDate(Calendar.getInstance());
 		
 		int i = 0;

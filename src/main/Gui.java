@@ -136,7 +136,7 @@ public class Gui {
                 ta.setForeground(fgColors[colorIndex]);
                 ta.setBackground(bgColors[colorIndex]);
                 ta.setText(introString1 + introString2);
-                ta.append("Please open a PDF. " + "Use \"File -> Open\" to navigate.");
+                ta.append("Please open a PDF. " + "Use \"File -> Open\" to navigate." + "\n");
         	}
         });
         
@@ -147,6 +147,7 @@ public class Gui {
         frame.setVisible(true);
         
         ta.setText(introString1 + introString2);
+        ta.append("Please open a PDF. " + "Use \"File -> Open\" to navigate." + "\n");
         ta.setCaretPosition(ta.getDocument().getLength());
 	}
 }

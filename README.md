@@ -12,6 +12,8 @@ Select your PDF from the "File -> Open" option in the menu bar and the program w
 To sort another file just open it in the same way.
 For alternate color themes you can scroll through them by clicking the "Themes" button.
 The "Reset" button will restart the program, clearing the text area and defaulting the color theme.
+You can create a PDF for testing purposes by selecting "Create Test File" from the "File" menu.
+This will generate a blank PDF of 25 randomly mixed letter and legal sized pages in the program directory. 
 
 ## Credits
 Developed by [Evan DeVizio](https://evandevizio.com)
